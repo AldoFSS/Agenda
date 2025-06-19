@@ -1,5 +1,4 @@
 $(document).ready(function () {
-    // Cargar tabla con filtro de estatus
     $('#select_estatus').on('change', function () {
         cargarTabla($(this).val());
     });

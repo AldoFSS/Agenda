@@ -1,11 +1,9 @@
 let calendar;
 document.addEventListener('DOMContentLoaded', () => { 
 
-    //Inicializar los modales para crear y editar citas
     const crearCitaModal = new bootstrap.Modal(document.getElementById('crearCitaModal'));
     const editarCitaModal = new bootstrap.Modal(document.getElementById('editarCitaModal'));
 
-    // Obtiene el contenedor del calendario
     const calendarEl = document.getElementById('calendario');
 
     calendar = new FullCalendar.Calendar(calendarEl, {
@@ -95,7 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 timerProgressBar: true,
             });                  
 
-                            evento.remove(); // Elimina visualmente el evento del calendario
+                            evento.remove(); 
                         })
                         .catch(err => {
                             Swal.fire('Error', err.message, 'error');

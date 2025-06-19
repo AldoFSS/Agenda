@@ -1,10 +1,10 @@
-// funciones_usuario.js
+
 $(document).ready(function () {
     $('#select_estatus').on('change', function () {
         cargarTabla($(this).val());
     });
 
-    cargarTabla(); // Cargar al inicio
+    cargarTabla(); 
 
     $('#productosTable').DataTable({
         responsive: true,

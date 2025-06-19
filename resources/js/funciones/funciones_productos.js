@@ -1,10 +1,9 @@
 $(document).ready(function () {
-    // Cargar Selects al iniciar
+
     cargarSelect('/categoria/obtener', '#select_categoria, #editar_categoria', 'Seleccione una Categoría', 'id_categoria', 'nombre_categoria');
     cargarSelect('/marcas/obtener', '#select_marca, #editar_marca', 'Seleccione una Marca', 'id_marca', 'nombre_marca');
     cargarSelect('/cliente/obtenerProveedor', '#select_proveedor, #editar_proveedor', 'Seleccione un proveedor', 'id_proveedor', 'nombre_proveedor');
 
-    // Cargar tabla con filtro de estatus
     $('#select_estatus').on('change', function () {
         cargarTabla($(this).val());
     });
@@ -408,7 +407,6 @@ function generarCodigoDeBarras(inputSelector, barcodeSelector) {
                     height: 40
                 });
             } else {
-                // Limpiar el contenido del SVG
                 barcodeElement.innerHTML = '';
             }
         });

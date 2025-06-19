@@ -1,13 +1,8 @@
-// funciones_usuario.js
 
 $(document).ready(function () {
-
-    // Evento para recargar la tabla al cambiar el filtro de estatus
     $('#select_estatus').on('change', function () {
         cargarTabla($(this).val());
     });
-
-    // Cargar tabla al iniciar
     cargarTabla();
 });
 $(document).on('click', '.btn-eliminar', function () {

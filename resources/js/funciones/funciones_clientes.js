@@ -2,7 +2,6 @@ $(document).ready(function () {
     $('#select_estatus').on('change', function () {
         cargarTabla($(this).val());
     });
-    // Cargar estados al cargar la página
     const estadoSelects = document.querySelectorAll('#Select_estado, #editar_estado');
     $.ajax({
         url: '/estados/buscar',
@@ -25,7 +24,7 @@ $(document).ready(function () {
         cargarMunicipiosPorEstado($(this).val());
     });
 
-    cargarTabla(); // Cargar tabla al inicio
+    cargarTabla();
 });
 $(document).on('click', '.btn-eliminar', function () {
     const id = $(this).data('id');

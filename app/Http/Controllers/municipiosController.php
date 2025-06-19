@@ -90,8 +90,8 @@ class municipiosController
     }
     public function BuscarMunicipio($id_estado)
     {
-        $municipios = municipios::select('id_municipio', 'municipio as nombre_municipio') // alias para usar en JS
-        ->where('id_estd', $id_estado) // corregido
+        $municipios = municipios::select('id_municipio', 'municipio as nombre_municipio')
+        ->where('id_estd', $id_estado) 
         ->get();
 
         return response()->json($municipios);

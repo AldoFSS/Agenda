@@ -13,7 +13,7 @@ class zonasController
 {
     public function MostrarZonas($estatus){
         if ($estatus == 1 || $estatus == 0) {
-            $zonas = zonas::where('estatus', $estatus)->get(); // <- Falta get()
+            $zonas = zonas::where('estatus', $estatus)->get();
         } else {
             $zonas = zonas::all();
         }
