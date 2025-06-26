@@ -71,7 +71,7 @@ function cargarTabla(estatus = 'All') {
                     if (data) {
                         return `<img src="${data}" width="50" height="50" alt="Imagen" style="object-fit: cover; border-radius: 5px;">`;
                     } else {
-                        return `<img src="imgproducto/user_default.png" width="50" height="50" alt="Sin imagen">`; // o deja un texto si no hay imagen
+                        return `<img src="imgproducto/user_default.png" width="50" height="50" alt="Sin imagen">`;
                     }
                 }
             },
@@ -86,16 +86,16 @@ function cargarTabla(estatus = 'All') {
             { data: 'codigo' },
             { data: 'proveedor' },
             {
-  data: 'created_at',
-  render: function(data) {
-    if (!data) return '';
-    const fecha = new Date(data);
-    const opciones = { day: 'numeric', month: 'long', year: 'numeric' };
-    let fechaFormateada = fecha.toLocaleDateString('es-MX', opciones);
-    fechaFormateada = fechaFormateada.replace(' de ', ' ');
-    return fechaFormateada;
-  }
-},
+                data: 'created_at',
+                render: function(data) {
+                    if (!data) return '';
+                    const fecha = new Date(data);
+                    const opciones = { day: 'numeric', month: 'long', year: 'numeric' };
+                    let fechaFormateada = fecha.toLocaleDateString('es-MX', opciones);
+                    fechaFormateada = fechaFormateada.replace(' de ', ' ');
+                    return fechaFormateada;
+                }
+            },
             {
                 data: null,
                 orderable: false,

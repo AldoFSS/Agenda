@@ -58,16 +58,16 @@ function cargarTabla(estatus = 'All') {
             { data: 'municipio' },
             { data: 'Estado' },
             {
-  data: 'created_at',
-  render: function(data) {
-    if (!data) return '';
-    const fecha = new Date(data);
-    const opciones = { day: 'numeric', month: 'long', year: 'numeric' };
-    let fechaFormateada = fecha.toLocaleDateString('es-MX', opciones);
-    fechaFormateada = fechaFormateada.replace(' de ', ' ');
-    return fechaFormateada;
-  }
-},
+                data: 'created_at',
+                render: function(data) {
+                    if (!data) return '';
+                    const fecha = new Date(data);
+                    const opciones = { day: 'numeric', month: 'long', year: 'numeric' };
+                    let fechaFormateada = fecha.toLocaleDateString('es-MX', opciones);
+                    fechaFormateada = fechaFormateada.replace(' de ', ' ');
+                    return fechaFormateada;
+                }
+            },
             {
                 data: null,
                 orderable: false,

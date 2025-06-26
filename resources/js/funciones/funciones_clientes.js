@@ -62,7 +62,7 @@ function cargarTabla(estatus = 'All') {
                         if (data) {
                             return `<img src="${data}" width="50" height="50" alt="Imagen" style="object-fit: cover; border-radius: 5px;">`;
                         } else {
-                            return `<img src="imgcliente/user_default.png" width="50" height="50" alt="Sin imagen">`; // o deja un texto si no hay imagen
+                            return `<img src="imgcliente/user_default.png" width="50" height="50" alt="Sin imagen">`;
                         }
                     }
                 },
@@ -77,60 +77,53 @@ function cargarTabla(estatus = 'All') {
                 { data: 'Estado' },
                 { data: 'Municipio' },
                 {
-  data: 'created_at',
-  render: function(data) {
-    if (!data) return '';
-    const fecha = new Date(data);
-    const opciones = { day: 'numeric', month: 'long', year: 'numeric' };
-    let fechaFormateada = fecha.toLocaleDateString('es-MX', opciones);
-    fechaFormateada = fechaFormateada.replace(' de ', ' ');
-    return fechaFormateada;
-  }
-},
+                    data: 'created_at',
+                    render: function(data) {
+                        if (!data) return '';
+                        const fecha = new Date(data);
+                        const opciones = { day: 'numeric', month: 'long', year: 'numeric' };
+                        let fechaFormateada = fecha.toLocaleDateString('es-MX', opciones);
+                        fechaFormateada = fechaFormateada.replace(' de ', ' ');
+                        return fechaFormateada;
+                    }
+                },
                 {
-    data: null,
-    orderable: false,
-    searchable: false,
-    render: function (data, type, row) {
-        const botonEditar = `
-            <li>
-                <a title="Editar" href="#" class="btn btn-primary btn-editarCliente"
-                    data-id="${row.id_cliente}" data-bs-toggle="modal" data-bs-target="#editarClienteModal">
-                    <i class="fas fa-edit"></i>
-                </a>
-            </li>`;
+                    data: null,
+                    orderable: false,
+                    searchable: false,
+                    render: function (data, type, row) {
+                        const botonEditar = `
+                        <li>
+                            <a title="Editar" href="#" class="btn btn-primary btn-editarCliente"
+                                data-id="${row.id_cliente}" data-bs-toggle="modal" data-bs-target="#editarClienteModal">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                        </li>`;
+                        let botonAccion = '';
+                        if (row.estatus == 1) {
+                            botonAccion = `
+                            <li>
+                                <a title="Eliminar" class="btn btn-danger btn-eliminar"
+                                    data-tipo="cliente" data-id="${row.id_cliente}">
+                                    <i class="fas fa-trash-alt"></i>
+                                </a>
+                            </li>`;
+                        } else if (row.estatus == 0) {
+                        botonAccion = `
+                        <li>
+                            <a title="Restaurar" class="btn btn-success btn-restaurar"
+                                data-tipo="cliente" data-id="${row.id_cliente}">
+                                <i class="fas fa-trash-restore"></i>
+                            </a>
+                        </li>`;
+                    }
+                    return `<ul class="opciones">${botonEditar}${botonAccion}</ul>`;
+                }
+            }
 
-        let botonAccion = '';
-
-        if (row.estatus == 1) {
-            botonAccion = `
-                <li>
-                    <a title="Eliminar" class="btn btn-danger btn-eliminar"
-                        data-tipo="cliente" data-id="${row.id_cliente}">
-                        <i class="fas fa-trash-alt"></i>
-                    </a>
-                </li>`;
-        } else if (row.estatus == 0) {
-            botonAccion = `
-                <li>
-                    <a title="Restaurar" class="btn btn-success btn-restaurar"
-                        data-tipo="cliente" data-id="${row.id_cliente}">
-                        <i class="fas fa-trash-restore"></i>
-                    </a>
-                </li>`;
-        }
-
-        return `
-            <ul class="opciones">
-                ${botonEditar}
-                ${botonAccion}
-            </ul>`;
-    }
+        ]
+    });
 }
-
-            ]
-        });
-    }
 
 function cargarMunicipiosPorEstado(id_estado, id_municipioSeleccionado = null) {
     const municipioSelects = document.querySelectorAll('#editar_municipio, #Select_municipio');
