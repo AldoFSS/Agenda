@@ -31,7 +31,7 @@ function cargarTabla(estatus = 'All') {
                     if (data) {
                         return `<img src="${data}" width="50" height="50" alt="Imagen" style="object-fit: cover; border-radius: 5px;">`;
                     } else {
-                        return `<img src="imgusuario/user_default.png" width="50" height="50" alt="Sin imagen">`; // o deja un texto si no hay imagen
+                        return `<img src="imgusuario/user_default.png" width="50" height="50" alt="Sin imagen">`;
                     }
                 }
             },

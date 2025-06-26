@@ -26,6 +26,7 @@
       <div class="d-flex">
         <a class="toggle-btn1" href=""><i class="fas fa-home" title="Inicio"></i></a>
         <div class="sidebar-logo">
+          <span  id="nombreUsuario" class="ms-2 fw-bold"></span>
         </div>
       </div>
       <ul class="sidebar-nav">
@@ -126,7 +127,7 @@
         <?php endif; ?>
       </ul>
       <div class="sidebar-footer">
-        <a  href="<?php echo e(route('login')); ?>" class="sidebar-link">
+        <a  href=""  id="btnLogout" class="sidebar-link">
         <i class="fas fa-sign-out-alt" title="Cerrar sesión"></i>
           <span>Logout</span>
         </a>

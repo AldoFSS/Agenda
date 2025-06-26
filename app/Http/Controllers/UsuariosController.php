@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\usuarios;
 use DB;
+use Hash;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -20,7 +21,17 @@ class UsuariosController
         }
         return response(['data' => $usuarios]);
     }
+    public function contadores()
+    {
+        $contadores = DB::select("
+            SELECT 
+                (SELECT COUNT(*) FROM usuarios) AS total_usuarios,
+                (SELECT COUNT(*) FROM cliente) AS total_clientes,
+                (SELECT COUNT(*) FROM productos) AS total_productos
+        ");
 
+        return response()->json($contadores[0]);
+    }
    public function crearUsuario(Request $request) 
    {
     $validated = $request->validate([
@@ -190,21 +201,47 @@ class UsuariosController
         }
         return response()->json($usuario, 200, [], JSON_UNESCAPED_UNICODE);
     }
-    public function Buscarusuario(Request $request)
+     public function login(Request $request)
     {
-        $credenciales = $request->only('nombre_usuario', 'contraseña');
+        $request->validate([
+            'nombre_usuario' => 'required|string',
+            'contraseña' => 'required|string',
+        ]);
 
-        $usuario = usuarios::where('nombre_usuario', $credenciales['nombre_usuario'])->first();
+        $usuario = usuarios::where('nombre_usuario', $request->nombre_usuario)->first();
 
-        if ($usuario && sha1($credenciales['contraseña']) === $usuario->contraseña) {
-            Auth::login($usuario); 
-            return redirect()->intended('/home');
+        if (!$usuario || sha1($request->contraseña) !== $usuario->contraseña) {
+            return response()->json([
+                'success' => false,
+                'title' => 'Credenciales inválidas',
+                'message' => 'Usuario o contraseña incorrectos.',
+            ]);
         }
 
-        return back()->withErrors([
-            'nombre_usuario' => 'Usuario o contraseña incorrectos',
+        Auth::login($usuario); // Inicia sesión
+
+        return response()->json([
+            'success' => true,
+            'title' => 'Bienvenido',
+            'message' => 'Ingreso exitoso.',
+            'usuario' => [
+                'nombre_usuario' => $usuario->nombre_usuario
+            ]
         ]);
     }
+    public function logout(Request $request)
+{
+   Auth::logout();
+    $request->session()->invalidate();
+    $request->session()->regenerateToken();
+
+    return response()->json([
+        'success' => true,
+        'title' => 'Sesión cerrada',
+        'message' => 'Has cerrado sesión correctamente.'
+    ]);
+}
+
     public function Usuarios(){
         $usuarios = usuarios::select([
             'id_usuario',

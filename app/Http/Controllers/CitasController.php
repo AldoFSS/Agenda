@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\citas;
 use App\Models\cliente;
 use App\Models\usuarios;
+use DB;
 use Google_Service_Calendar_EventDateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -75,13 +76,15 @@ class CitasController
             'hora_fin' => $request->hora_fin,
             'motivo' => $request->motivo,
         ]);
+        $nombreCliente = DB::table('cliente')->where('id_cliente', $request->id_cliente)->value('nombre_cliente');
+        $nombreUsuario = DB::table('usuarios')->where('id_usuario', $request->id_usuario)->value('nombre_usuario');
 
         $client = $this->getClient();
         $service = new Google_Service_Calendar($client);
 
         $event = new Google_Service_Calendar_Event([
             'summary' => $request->motivo,
-            'description' => "Cliente ID: {$request->id_cliente}, Usuario ID: {$request->id_usuario}",
+            'description' =>  "Cliente: {$nombreCliente}, Usuario: {$nombreUsuario}",
             'start' => new Google_Service_Calendar_EventDateTime([
                 'dateTime' => $request->fecha_cita . 'T' . $request->hora_inicio . ':00',
                 'timeZone' => 'America/Mexico_City',
@@ -175,13 +178,15 @@ class CitasController
             'motivo' => $request->motivo,
         ]);
         if ($cita->google_event_id) {
+            $nombreCliente = DB::table('cliente')->where('id_cliente', $request->id_cli)->value('nombre_cliente');
+            $nombreUsuario = DB::table('usuarios')->where('id_usuario', $request->id_usr)->value('nombre_usuario');
             $client = $this->getClient();
             $service = new  Google_Service_Calendar($client);
 
             $calendarId = 'primary';
             $event = $service->events->get($calendarId, $cita->google_event_id);
             $event->setSummary($request->motivo);
-            $event->setDescription("Cliente ID: {$request->id_cliente}, Usuario ID: {$request->id_usuario}");
+            $event->setDescription("Cliente: {$nombreCliente}, Usuario: {$nombreUsuario}");
             $event->setStart(new Google_Service_Calendar_EventDateTime([
                 'dateTime' => $request->fecha_cita . 'T' . $request->hora_inicio . ':00',
                 'timeZone' => 'America/Mexico_City',

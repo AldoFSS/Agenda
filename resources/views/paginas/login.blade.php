@@ -11,6 +11,8 @@
     crossorigin="anonymous"
     referrerpolicy="no-referrer"/>
     <meta charset="UTF-8">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
@@ -27,15 +29,15 @@
                     <div class="card-body p-5 text-center">
                         <div class="mb-md-5 mt-md-4 pb-5">
                             <h2 class="fw-bold mb-2 text-uppercase">Login</h2>
-                            <form action="{{ route('usuarios.login')}}" method="POST" >
+                            <form action="" id="formLogin" method="POST" >
                                 @csrf
                                 <div data-mdb-input-init class="form-outline form-white mb-4">
                                     <label for="usuario" class="form-label">Usuario</label>
-                                    <input type="text" class="form-control form-control-lg" name="nombre_usuario" id="nombre_usuario" required>
+                                    <input type="text" class="form-control form-control-lg" name="nombre_usuario" id="usuario" required>
                                 </div>
                                 <div data-mdb-input-init class="form-outline form-white mb-4">
                                     <label for="contraseña" class="form-label">Contraseña</label>
-                                    <input type="password" class="form-control form-control-lg" name="contraseña" id="contraseña" required>
+                                    <input type="password" class="form-control form-control-lg" name="contraseña" id="pass" required>
                                 </div>
                                 <button data-mdb-button-init data-mdb-ripple-init class="btn btn-outline-dark btn-lg px-5" type="submit">Login</button>
                             </form>
@@ -45,6 +47,7 @@
             </div>
         </div>
     </div>
+    @vite(['resources/js/funciones/funciones_login.js'])
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
