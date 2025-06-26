@@ -1,5 +1,5 @@
 <?php
-use App\Http\Controllers\EliminacionController;
+use App\Http\Controllers\UsuariosController;
 use Illuminate\Support\Facades\Route;
 require __DIR__.'/f_categoria.php';
 require __DIR__.'/f_cita.php';
@@ -61,3 +61,4 @@ require __DIR__.'/f_zona.php';
     Route::get('/ventas', function (){
         return view('paginas.ventas');
     })->name('ventas');
+    Route::get('/contadores', [UsuariosController::class, 'contadores']);

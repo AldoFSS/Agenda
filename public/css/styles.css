@@ -50,6 +50,12 @@ body {
     width: 260px;
     min-width: 260px;
 }
+#nombreUsuario {
+    color: #FFF;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-left: 10px;
+}
 
 .toggle-btn {
     background-color: transparent;

@@ -21,6 +21,8 @@ export default defineConfig({
                 'resources/js/funciones/funciones_zona.js',
                 'resources/js/funciones/funciones_municipio.js',
                 'resources/js/funciones/funciones_estados.js',
+                'resources/js/funciones/funciones_login.js',
+                'resources/js/funciones/funciones_home.js',
             ],
             refresh: true,
         }),
