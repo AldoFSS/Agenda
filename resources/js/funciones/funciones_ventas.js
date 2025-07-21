@@ -571,11 +571,11 @@ $(document).on('click', '.btn-editarVenta', function () {
       tablaBody.innerHTML = '';
 
       detalles.forEach(detalle => {
-        agregarFilaDetalles(detalle);  // ← aquí se usa la nueva función
+        agregarFilaDetalles(detalle); 
       });
 
       // Actualizar el total general
-      calcularTotal(); // O actualizarTotalGeneral() si la usas aparte
+      calcularTotal();
     },
     error: function () {
       alert('Error al obtener los datos de la venta');
